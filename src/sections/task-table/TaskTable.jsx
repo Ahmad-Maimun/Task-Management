@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import Container from "../../components/container";
 import { Button, Table } from "flowbite-react";
 import TaskItem from "./TaskItem";
 import TaskTableHeader from "../TaskTableHeader";
+import { ModalPopup } from "../../components/ModalPopup";
+import { useState } from "react";
 
 function NoData() {
     return (
@@ -14,15 +17,16 @@ function NoData() {
 }
 
 function TaskTable() {
+    let [openModal, setOpenModal] = useState(false);
     return (
-        <Container className="mt-10">
+        <Container className="mt-5">
             <div className="flex justify-end">
-                <Button className="mr-2" color="success">
+                <Button onClick={() => setOpenModal(true)} className="mr-2" color="success">
                     Add Task
                 </Button>
                 <Button color="failure">Clear Tasks</Button>
             </div>
-            <div className="p-2 rounded-md border my-6">
+            <div className="p-2 rounded-md border dark:border-gray-500 my-6">
                 <TaskTableHeader />
                 <div className="overflow-x-auto">
                     <Table hoverable>
@@ -36,11 +40,15 @@ function TaskTable() {
                         </Table.Head>
                         <Table.Body className="divide-y">
                             <TaskItem />
+                            <TaskItem />
+                            <TaskItem />
+                            <TaskItem />
                             <NoData />
                         </Table.Body>
                     </Table>
                 </div>
             </div>
+            <ModalPopup onOpen={openModal} onClose={() => setOpenModal(false)} />
         </Container>
     );
 }
