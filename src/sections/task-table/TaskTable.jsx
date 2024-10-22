@@ -18,6 +18,33 @@ function NoData() {
 
 function TaskTable() {
     let [openModal, setOpenModal] = useState(false);
+    let [tasks, setTasks] = useState([
+        {
+            id: 1,
+            "title": "title one",
+            "description": "description one",
+            "assignTo": "Person Four",
+            "priority": "Medium"
+        },
+        {
+            id: 2,
+            "title": "title tow",
+            "description": "description tow",
+            "assignTo": "Person Four",
+            "priority": "Medium"
+        }
+    ]);
+    let createHandler = (item) => {
+        let updateTasks = [
+            ...tasks,
+            {
+                ...item,
+                id: tasks.length + 1
+            }
+        ];
+        setTasks(updateTasks);
+        
+    }
     return (
         <Container className="mt-5">
             <div className="flex justify-end">
@@ -39,16 +66,12 @@ function TaskTable() {
                             <Table.HeadCell>Action</Table.HeadCell>
                         </Table.Head>
                         <Table.Body className="divide-y">
-                            <TaskItem />
-                            <TaskItem />
-                            <TaskItem />
-                            <TaskItem />
-                            <NoData />
+                            {tasks.length == 0 ? <NoData /> : tasks.map((item, index) => <TaskItem data={item} index={index} key={item.id} />)}
                         </Table.Body>
                     </Table>
                 </div>
             </div>
-            <ModalPopup onOpen={openModal} onClose={() => setOpenModal(false)} />
+            <ModalPopup onCreate={createHandler} onOpen={openModal} onClose={() => setOpenModal(false)} />
         </Container>
     );
 }

@@ -2,7 +2,7 @@ import { Button, Modal, Label, TextInput, Textarea, Select } from "flowbite-reac
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formValidation } from "../form-validaiton/modalForm";
-export function ModalPopup({ onOpen, onClose }) {
+export function ModalPopup({ onOpen, onClose, onCreate }) {
     const {
         register,
         handleSubmit,
@@ -10,9 +10,10 @@ export function ModalPopup({ onOpen, onClose }) {
     } = useForm({
         resolver: yupResolver(formValidation),
     });
+    
 
     const onSubmit = (data) => {
-        console.log(data);
+        onCreate(data);
     };
 
     return (
@@ -42,7 +43,7 @@ export function ModalPopup({ onOpen, onClose }) {
                                         <Label htmlFor="countries" value="Assign To" />
                                     </div>
                                     <Select id="countries" {...register("assignTo")}>
-                                        <option>Select Something</option>
+                                        <option  disabled>Select Something</option>
                                         <option value="Person One">Person One</option>
                                         <option value="Person Tow">Person Tow</option>
                                         <option value="Person Three">Person Three</option>
@@ -56,7 +57,7 @@ export function ModalPopup({ onOpen, onClose }) {
                                     <Label htmlFor="countries" value="Priority" />
                                 </div>
                                 <Select id="countries" {...register("priority")}>
-                                    <option>Select Something</option>
+                                    <option  disabled>Select Something</option>
                                     <option value="High">High</option>
                                     <option value="Medium">Medium</option>
                                     <option value="Low">Low</option>
