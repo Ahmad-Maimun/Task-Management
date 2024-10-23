@@ -1,7 +1,7 @@
 import { Table } from "flowbite-react";
 
 function TaskItem(props) {
-    let {title, description, assignTo, priority} = props.data;
+    let { title, description, assignTo, priority } = props.data;
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             <Table.Cell>{props.index + 1}</Table.Cell>
