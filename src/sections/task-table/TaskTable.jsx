@@ -42,7 +42,7 @@ function TaskTable() {
                 id: tasks.length + 1
             }
         ];
-        setTasks(updateTasks);
+        setTasks(updateTasks.reverse());
         
     }
     return (
@@ -51,7 +51,7 @@ function TaskTable() {
                 <Button onClick={() => setOpenModal(true)} className="mr-2" color="success">
                     Add Task
                 </Button>
-                <Button color="failure">Clear Tasks</Button>
+                <Button color="failure" onClick={() => setTasks('')}>Clear Tasks</Button>
             </div>
             <div className="p-2 rounded-md border dark:border-gray-500 my-6">
                 <TaskTableHeader />

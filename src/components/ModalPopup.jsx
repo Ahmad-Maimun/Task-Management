@@ -5,6 +5,7 @@ import { formValidation } from "../form-validaiton/modalForm";
 export function ModalPopup({ onOpen, onClose, onCreate }) {
     const {
         register,
+        reset,
         handleSubmit,
         formState: { errors },
     } = useForm({
@@ -14,6 +15,8 @@ export function ModalPopup({ onOpen, onClose, onCreate }) {
 
     const onSubmit = (data) => {
         onCreate(data);
+        reset();
+        onClose();
     };
 
     return (
