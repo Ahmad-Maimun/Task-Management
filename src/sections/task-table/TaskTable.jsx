@@ -2,10 +2,10 @@
 import Container from "../../components/Container";
 import { Button, Table } from "flowbite-react";
 import TaskItem from "./TaskItem";
-import TaskTableHeader from "../TaskTableHeader";
 import { ModalPopup } from "../../components/ModalPopup";
 import { useState } from "react";
 import { DeleteTasksModal } from "../../components/DeleteTasksModal";
+import TaskTableHeader from "./TaskTableHeader";
 
 function NoData() {
     return (
