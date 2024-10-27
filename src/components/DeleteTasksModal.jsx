@@ -1,11 +1,7 @@
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
-export function DeleteTasksModal({ onOpenModal, onCloseModal, setTasks }) {
-    let deleteTasks = () => {
-        setTasks([]);
-        onCloseModal();
-    };
+export function DeleteTasksModal({ onOpenModal, onCloseModal, onDeleteModal }) {
     return (
         <>
             <Modal show={onOpenModal} size="md" onClose={() => onCloseModal(false)} popup>
@@ -15,7 +11,7 @@ export function DeleteTasksModal({ onOpenModal, onCloseModal, setTasks }) {
                         <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
                         <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this Task?</h3>
                         <div className="flex justify-center gap-4">
-                            <Button color="failure" onClick={() => deleteTasks()}>
+                            <Button color="failure" onClick={() => onCloseModal(onDeleteModal())}>
                                 {"Yes, I'm sure"}
                             </Button>
                             <Button color="gray" onClick={() => onCloseModal(false)}>

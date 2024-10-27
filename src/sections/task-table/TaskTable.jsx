@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import Container from "../../components/Container";
+import Container from "../../components/container";
 import { Button, Table } from "flowbite-react";
 import TaskItem from "./TaskItem";
 import { ModalPopup } from "../../components/ModalPopup";
@@ -29,13 +29,22 @@ function TaskTable() {
         setTasks(updateTasks.reverse());
     };
     let editHandler = (data) => {
-        setTasks (tasks.map(item => {
-            if (tasks.id === item.id) {
+        setTasks(tasks.map(item => {
+            if (data.id === item.id) {
                 return data;
             } else {
                 return item;
             }
-        }))
+        }));
+    }
+    let deleteHandler = (id) => {
+        setTasks(tasks.filter(item => {
+            return item.id != id;
+        }));
+        
+    }
+    let deleteTask = () => {
+        setTasks([]);
     }
     return (
         <Container className="mt-5">
@@ -59,12 +68,12 @@ function TaskTable() {
                             <Table.HeadCell>Priority</Table.HeadCell>
                             <Table.HeadCell>Action</Table.HeadCell>
                         </Table.Head>
-                        <Table.Body className="divide-y">{tasks.length == 0 ? <NoData /> : tasks.map((item, index) => <TaskItem onEdit={editHandler} data={item} index={index} key={item.id} />)}</Table.Body>
+                        <Table.Body className="divide-y">{tasks.length == 0 ? <NoData /> : tasks.map((item, index) => <TaskItem onDelete={deleteHandler} onEdit={editHandler} data={item} index={index} key={item.id} />)}</Table.Body>
                     </Table>
                 </div>
             </div>
             <ModalPopup onCreate={createHandler} onOpen={openModal} onClose={() => setOpenModal(false)} />
-            {tasks.length > 0 && <DeleteTasksModal onOpenModal={openDeleteModal} onCloseModal={() => setOpenDeleteModal(false)} setTasks={setTasks} />}
+            <DeleteTasksModal onOpenModal={openDeleteModal} onCloseModal={() => setOpenDeleteModal(false)} onDeleteModal={deleteTask} />
         </Container>
     );
 }
