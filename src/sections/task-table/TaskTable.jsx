@@ -24,13 +24,19 @@ function TaskTable() {
     let createHandler = (item) => {
         let updateTasks = [
             ...tasks,
-            {
-                ...item,
-                id: tasks.length + 1,
-            },
+            item
         ];
         setTasks(updateTasks.reverse());
     };
+    let editHandler = (data) => {
+        setTasks (tasks.map(item => {
+            if (tasks.id === item.id) {
+                return data;
+            } else {
+                return item;
+            }
+        }))
+    }
     return (
         <Container className="mt-5">
             <div className="flex justify-end">
@@ -53,7 +59,7 @@ function TaskTable() {
                             <Table.HeadCell>Priority</Table.HeadCell>
                             <Table.HeadCell>Action</Table.HeadCell>
                         </Table.Head>
-                        <Table.Body className="divide-y">{tasks.length == 0 ? <NoData /> : tasks.map((item, index) => <TaskItem data={item} index={index} key={item.id} />)}</Table.Body>
+                        <Table.Body className="divide-y">{tasks.length == 0 ? <NoData /> : tasks.map((item, index) => <TaskItem onEdit={editHandler} data={item} index={index} key={item.id} />)}</Table.Body>
                     </Table>
                 </div>
             </div>
