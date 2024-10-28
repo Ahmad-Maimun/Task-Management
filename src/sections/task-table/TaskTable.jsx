@@ -21,6 +21,7 @@ function TaskTable() {
     let [openModal, setOpenModal] = useState(false);
     let [openDeleteModal, setOpenDeleteModal] = useState(false);
     let [tasks, setTasks] = useState([]);
+    let [searchText, setSearchText] = useState('');
     let createHandler = (item) => {
         let updateTasks = [
             ...tasks,
@@ -46,6 +47,12 @@ function TaskTable() {
     let deleteTask = () => {
         setTasks([]);
     }
+    let searchHandler = (text) => {
+        setSearchText(text);
+    }
+    let updatedTasks = tasks.filter(item => {
+        return item.title.toLowerCase().includes(searchText.toLowerCase());
+    });
     return (
         <Container className="mt-5">
             <div className="flex justify-end">
@@ -57,7 +64,7 @@ function TaskTable() {
                 </Button>
             </div>
             <div className="p-2 rounded-md border dark:border-gray-500 my-6">
-                <TaskTableHeader />
+                <TaskTableHeader onSearch={searchHandler} />
                 <div className="overflow-x-auto">
                     <Table hoverable>
                         <Table.Head>
@@ -68,7 +75,7 @@ function TaskTable() {
                             <Table.HeadCell>Priority</Table.HeadCell>
                             <Table.HeadCell>Action</Table.HeadCell>
                         </Table.Head>
-                        <Table.Body className="divide-y">{tasks.length == 0 ? <NoData /> : tasks.map((item, index) => <TaskItem onDelete={deleteHandler} onEdit={editHandler} data={item} index={index} key={item.id} />)}</Table.Body>
+                        <Table.Body className="divide-y">{tasks.length == 0 ? <NoData /> : updatedTasks.map((item, index) => <TaskItem onDelete={deleteHandler} onEdit={editHandler} data={item} index={index} key={item.id} />)}</Table.Body>
                     </Table>
                 </div>
             </div>
