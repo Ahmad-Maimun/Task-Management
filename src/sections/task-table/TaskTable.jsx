@@ -21,36 +21,36 @@ function TaskTable() {
     let [openModal, setOpenModal] = useState(false);
     let [openDeleteModal, setOpenDeleteModal] = useState(false);
     let [tasks, setTasks] = useState([]);
-    let [searchText, setSearchText] = useState('');
+    let [searchText, setSearchText] = useState("");
     let createHandler = (item) => {
-        let updateTasks = [
-            ...tasks,
-            item
-        ];
+        let updateTasks = [...tasks, item];
         setTasks(updateTasks.reverse());
     };
     let editHandler = (data) => {
-        setTasks(tasks.map(item => {
-            if (data.id === item.id) {
-                return data;
-            } else {
-                return item;
-            }
-        }));
-    }
+        setTasks(
+            tasks.map((item) => {
+                if (data.id === item.id) {
+                    return data;
+                } else {
+                    return item;
+                }
+            })
+        );
+    };
     let deleteHandler = (id) => {
-        setTasks(tasks.filter(item => {
-            return item.id != id;
-        }));
-        
-    }
+        setTasks(
+            tasks.filter((item) => {
+                return item.id != id;
+            })
+        );
+    };
     let deleteTask = () => {
         setTasks([]);
-    }
+    };
     let searchHandler = (text) => {
         setSearchText(text);
-    }
-    let updatedTasks = tasks.filter(item => {
+    };
+    let updatedTasks = tasks.filter((item) => {
         return item.title.toLowerCase().includes(searchText.toLowerCase());
     });
     return (

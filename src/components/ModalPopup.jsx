@@ -13,7 +13,7 @@ export function ModalPopup({ onOpen, onClose, onCreate, taskToEdit, onEdit }) {
     });
     const onSubmit = (data) => {
         if (taskToEdit) {
-            onEdit(data)
+            onEdit(data);
         } else {
             onCreate(data);
         }
@@ -26,13 +26,13 @@ export function ModalPopup({ onOpen, onClose, onCreate, taskToEdit, onEdit }) {
         title: null,
         description: null,
         assignTo: null,
-        priority: null
-        }
+        priority: null,
+    };
 
     return (
         <>
             <Modal show={onOpen} onClose={() => onClose(false)}>
-                <Modal.Header>{taskToEdit ? 'Edit Task' : 'Add New Task'}</Modal.Header>
+                <Modal.Header>{taskToEdit ? "Edit Task" : "Add New Task"}</Modal.Header>
                 <Modal.Body>
                     <div className="space-y-6">
                         <form action="#" className="flex flex-wrap" onSubmit={handleSubmit(onSubmit)}>
@@ -40,7 +40,7 @@ export function ModalPopup({ onOpen, onClose, onCreate, taskToEdit, onEdit }) {
                                 <div className="mb-2 block">
                                     <Label htmlFor="title" value="Title" />
                                 </div>
-                                <input defaultValue={formData.id} {...register('id')} type="hidden" />
+                                <input defaultValue={formData.id} {...register("id")} type="hidden" />
                                 <TextInput defaultValue={formData.title} id="title" type="text" {...register("title", { required: true, minLength: 6, maxLength: 10 })} />
                                 {errors.title && <span className="text-red-500">{errors.title.message}</span>}
                             </div>
@@ -78,7 +78,9 @@ export function ModalPopup({ onOpen, onClose, onCreate, taskToEdit, onEdit }) {
                                 </Select>
                                 {errors.priority && <span className="text-red-500">{errors.priority.message}</span>}
                             </div>
-                            <Button type="submit" className="mt-5">{taskToEdit ? 'Edit Task' : 'Add Task'}</Button>
+                            <Button type="submit" className="mt-5">
+                                {taskToEdit ? "Edit Task" : "Add Task"}
+                            </Button>
                         </form>
                     </div>
                 </Modal.Body>
